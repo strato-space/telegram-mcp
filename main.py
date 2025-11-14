@@ -213,7 +213,7 @@ def get_sender_name(message) -> str:
         return "Unknown"
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_chats(page: int = 1, page_size: int = 20) -> str:
     """
     Get a paginated list of chats.
@@ -239,7 +239,7 @@ async def get_chats(page: int = 1, page_size: int = 20) -> str:
         return log_and_format_error("get_chats", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_messages(chat_id: int, page: int = 1, page_size: int = 20) -> str:
     """
     Get paginated messages from a specific chat.
@@ -270,7 +270,7 @@ async def get_messages(chat_id: int, page: int = 1, page_size: int = 20) -> str:
         )
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def list_contacts() -> str:
     """
     List all contacts in your Telegram account.
@@ -296,7 +296,7 @@ async def list_contacts() -> str:
         return log_and_format_error("list_contacts", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def search_contacts(query: str) -> str:
     """
     Search for contacts by name, username, or phone number using Telethon's SearchRequest.
@@ -324,7 +324,7 @@ async def search_contacts(query: str) -> str:
         return log_and_format_error("search_contacts", e, query=query)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_contact_ids() -> str:
     """
     Get all contact IDs in your Telegram account.
@@ -338,7 +338,7 @@ async def get_contact_ids() -> str:
         return log_and_format_error("get_contact_ids", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def list_messages(
     chat_id: int,
     limit: int = 20,
@@ -460,7 +460,7 @@ async def list_messages(
         return log_and_format_error("list_messages", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def list_topics(
     chat_id: int,
     limit: int = 200,
@@ -544,7 +544,7 @@ async def list_topics(
         )
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def list_chats(chat_type: str = None, limit: int = 20) -> str:
     """
     List available chats with metadata.
@@ -605,7 +605,7 @@ async def list_chats(chat_type: str = None, limit: int = 20) -> str:
         return log_and_format_error("list_chats", e, chat_type=chat_type, limit=limit)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_chat(chat_id: int) -> str:
     """
     Get detailed information about a specific chat.
@@ -685,7 +685,7 @@ async def get_chat(chat_id: int) -> str:
         return log_and_format_error("get_chat", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_direct_chat_by_contact(contact_query: str) -> str:
     """
     Find a direct chat with a specific contact by name, username, or phone.
@@ -740,7 +740,7 @@ async def get_direct_chat_by_contact(contact_query: str) -> str:
         return log_and_format_error("get_direct_chat_by_contact", e, contact_query=contact_query)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_contact_chats(contact_id: int) -> str:
     """
     List all chats involving a specific contact.
@@ -792,7 +792,7 @@ async def get_contact_chats(contact_id: int) -> str:
         return log_and_format_error("get_contact_chats", e, contact_id=contact_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_last_interaction(contact_id: int) -> str:
     """
     Get the most recent message with a contact.
@@ -828,7 +828,7 @@ async def get_last_interaction(contact_id: int) -> str:
         return log_and_format_error("get_last_interaction", e, contact_id=contact_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_message_context(chat_id: int, message_id: int, context_size: int = 3) -> str:
     """
     Retrieve context around a specific message.
@@ -892,7 +892,7 @@ async def get_message_context(chat_id: int, message_id: int, context_size: int =
         )
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_me() -> str:
     """
     Get your own user information.
@@ -904,7 +904,7 @@ async def get_me() -> str:
         return log_and_format_error("get_me", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_participants(chat_id: int) -> str:
     """
     List all participants in a group or channel.
@@ -933,7 +933,7 @@ async def get_participants(chat_id: int) -> str:
         return log_and_format_error("get_participants", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def download_media(chat_id: int, message_id: int, file_path: str) -> str:
     """
     Download media from a message in a chat.
@@ -961,7 +961,7 @@ async def download_media(chat_id: int, message_id: int, file_path: str) -> str:
         )
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_privacy_settings() -> str:
     """
     Get your privacy settings for last seen status.
@@ -985,7 +985,7 @@ async def get_privacy_settings() -> str:
         return log_and_format_error("get_privacy_settings", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def export_contacts() -> str:
     """
     Export all contacts as a JSON string.
@@ -998,7 +998,7 @@ async def export_contacts() -> str:
         return log_and_format_error("export_contacts", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_blocked_users() -> str:
     """
     Get a list of blocked users.
@@ -1010,7 +1010,7 @@ async def get_blocked_users() -> str:
         return log_and_format_error("get_blocked_users", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_admins(chat_id: int) -> str:
     """
     Get all admins in a group or channel.
@@ -1028,7 +1028,7 @@ async def get_admins(chat_id: int) -> str:
         return log_and_format_error("get_admins", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_banned_users(chat_id: int) -> str:
     """
     Get all banned users in a group or channel.
@@ -1048,7 +1048,7 @@ async def get_banned_users(chat_id: int) -> str:
         return log_and_format_error("get_banned_users", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_invite_link(chat_id: int) -> str:
     """
     Get the invite link for a group or channel.
@@ -1091,7 +1091,7 @@ async def get_invite_link(chat_id: int) -> str:
         return log_and_format_error("get_invite_link", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def export_chat_invite(chat_id: int) -> str:
     """
     Export a chat invite link.
@@ -1124,7 +1124,7 @@ async def export_chat_invite(chat_id: int) -> str:
         return log_and_format_error("export_chat_invite", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_media_info(chat_id: int, message_id: int) -> str:
     """
     Get info about media in a message.
@@ -1142,7 +1142,7 @@ async def get_media_info(chat_id: int, message_id: int) -> str:
         return log_and_format_error("get_media_info", e, chat_id=chat_id, message_id=message_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def search_public_chats(query: str) -> str:
     """
     Search for public chats, channels, or bots by username or title.
@@ -1154,7 +1154,7 @@ async def search_public_chats(query: str) -> str:
         return log_and_format_error("search_public_chats", e, query=query)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def search_messages(chat_id: int, query: str, limit: int = 20) -> str:
     """
     Search for messages in a chat by text.
@@ -1178,7 +1178,7 @@ async def search_messages(chat_id: int, query: str, limit: int = 20) -> str:
         )
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def resolve_username(username: str) -> str:
     """
     Resolve a username to a user or chat ID.
@@ -1190,7 +1190,7 @@ async def resolve_username(username: str) -> str:
         return log_and_format_error("resolve_username", e, username=username)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_sticker_sets() -> str:
     """
     Get all sticker sets.
@@ -1202,7 +1202,7 @@ async def get_sticker_sets() -> str:
         return log_and_format_error("get_sticker_sets", e)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_gif_search(query: str, limit: int = 10) -> str:
     """
     Search for GIFs by query. Returns a list of Telegram document IDs (not file paths).
@@ -1257,7 +1257,7 @@ async def get_gif_search(query: str, limit: int = 10) -> str:
         return log_and_format_error("get_gif_search", e, query=query, limit=limit)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_bot_info(bot_username: str) -> str:
     """
     Get information about a bot by username.
@@ -1294,7 +1294,7 @@ async def get_bot_info(bot_username: str) -> str:
         return log_and_format_error("get_bot_info", e, bot_username=bot_username)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_history(chat_id: int, limit: int = 100) -> str:
     """
     Get full chat history (up to limit).
@@ -1316,7 +1316,7 @@ async def get_history(chat_id: int, limit: int = 100) -> str:
         return log_and_format_error("get_history", e, chat_id=chat_id, limit=limit)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_user_photos(user_id: int, limit: int = 10) -> str:
     """
     Get profile photos of a user.
@@ -1331,7 +1331,7 @@ async def get_user_photos(user_id: int, limit: int = 10) -> str:
         return log_and_format_error("get_user_photos", e, user_id=user_id, limit=limit)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_user_status(user_id: int) -> str:
     """
     Get the online status of a user.
@@ -1343,7 +1343,7 @@ async def get_user_status(user_id: int) -> str:
         return log_and_format_error("get_user_status", e, user_id=user_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_recent_actions(chat_id: int) -> str:
     """
     Get recent admin actions (admin log) in a group or channel.
@@ -1365,7 +1365,7 @@ async def get_recent_actions(chat_id: int) -> str:
         return log_and_format_error("get_recent_actions", e, chat_id=chat_id)
 
 
-@mcp.tool(annotations=ToolAnnotations(openWorldHint=True))
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
 async def get_pinned_messages(chat_id: int) -> str:
     """
     Get all pinned messages in a chat.
