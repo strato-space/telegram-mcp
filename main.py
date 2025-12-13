@@ -812,16 +812,30 @@ async def list_topics(
         if not getattr(entity, "forum", False):
             return "The specified supergroup does not have forum topics enabled."
 
-        result = await client(
-            functions.channels.GetForumTopicsRequest(
-                channel=entity,
-                offset_date=0,
-                offset_id=0,
-                offset_topic=offset_topic,
-                limit=limit,
-                q=search_query or None,
+        if hasattr(functions.messages, "GetForumTopicsRequest"):
+            result = await client(
+                functions.messages.GetForumTopicsRequest(
+                    peer=entity,
+                    offset_date=0,
+                    offset_id=0,
+                    offset_topic=offset_topic,
+                    limit=limit,
+                    q=search_query or None,
+                )
             )
-        )
+        elif hasattr(functions.channels, "GetForumTopicsRequest"):
+            result = await client(
+                functions.channels.GetForumTopicsRequest(
+                    channel=entity,
+                    offset_date=0,
+                    offset_id=0,
+                    offset_topic=offset_topic,
+                    limit=limit,
+                    q=search_query or None,
+                )
+            )
+        else:
+            return "This Telethon version does not support forum topics on this server."
 
         topics = getattr(result, "topics", None) or []
         if not topics:
