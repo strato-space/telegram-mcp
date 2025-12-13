@@ -1607,10 +1607,18 @@ async def download_media(chat_id: Union[int, str], message_id: int, file_path: s
     Download media from a message in a chat.
     Args:
         chat_id: The chat ID or username.
-        message_id: The message ID containing the media.
+        message_id: The Telegram message ID containing the media (must fit in signed 32-bit int).
         file_path: Absolute path to save the downloaded file (must be writable).
     """
     try:
+        if not isinstance(message_id, int):
+            return f"Invalid message_id: {message_id}. Type must be an integer."
+        if not (-(2**31) <= message_id <= 2**31 - 1):
+            return (
+                f"Invalid message_id: {message_id}. Telegram message IDs must fit in signed 32-bit int "
+                f"(-2147483648..2147483647). If you got this from get_user_photos, that's a profile photo id "
+                f"(int64), not a message id. Use download_profile_photos(user_id, limit) instead."
+            )
         entity = await client.get_entity(chat_id)
         msg = await client.get_messages(entity, ids=message_id)
         if not msg or not msg.media:
@@ -2977,7 +2985,12 @@ async def get_history(chat_id: Union[int, str], limit: int = 100) -> str:
 @validate_id("user_id")
 async def get_user_photos(user_id: Union[int, str], limit: int = 10) -> str:
     """
-    Get profile photos of a user.
+    Get profile photo IDs of a user.
+
+    Notes:
+        - Returns a JSON list of Telegram profile photo IDs (int64), not message IDs.
+        - These IDs can exceed 2147483647 and are not valid inputs for download_media().
+        - To download the photos, use download_profile_photos(user_id, limit).
     """
     try:
         user = await client.get_entity(user_id)
@@ -2987,6 +3000,58 @@ async def get_user_photos(user_id: Union[int, str], limit: int = 10) -> str:
         return json.dumps([p.id for p in photos.photos], indent=2)
     except Exception as e:
         return log_and_format_error("get_user_photos", e, user_id=user_id, limit=limit)
+
+
+@mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
+@validate_id("user_id")
+async def download_profile_photos(user_id: Union[int, str], limit: int = 10) -> str:
+    """
+    Download profile photos of a user to local disk.
+
+    Args:
+        user_id: The user ID or username (with or without '@').
+        limit: Max number of photos to download (1..100). Default: 10.
+
+    Returns:
+        JSON with the resolved user, output directory, and downloaded file paths.
+    """
+    try:
+        if not isinstance(limit, int):
+            return f"Invalid limit: {limit}. Type must be an integer."
+        if limit < 1 or limit > 100:
+            return f"Invalid limit: {limit}. Must be between 1 and 100."
+
+        user = await client.get_entity(user_id)
+        photos = await client.get_profile_photos(user, limit=limit)
+
+        username = getattr(user, "username", None)
+        safe_name_source = (username or str(getattr(user, "id", "")) or "user").lstrip("@")
+        safe_name = re.sub(r"[^a-zA-Z0-9_-]+", "_", safe_name_source).strip("_") or "user"
+
+        output_dir = os.path.join(script_dir, "media", "profile_photos", safe_name)
+        os.makedirs(output_dir, exist_ok=True)
+        if not os.access(output_dir, os.W_OK):
+            return f"Directory not writable: {output_dir}"
+
+        files: List[Dict[str, str]] = []
+        for photo in photos:
+            downloaded = await client.download_media(photo, file=output_dir)
+            photo_id = getattr(photo, "id", None)
+            record: Dict[str, str] = {"file_path": str(downloaded)}
+            if photo_id is not None:
+                record["photo_id"] = str(photo_id)
+            files.append(record)
+
+        result: Dict[str, Any] = {
+            "user_id": str(getattr(user, "id", "")),
+            "username": username,
+            "output_dir": output_dir,
+            "count": len(files),
+            "files": files,
+        }
+        return json.dumps(result, indent=2, ensure_ascii=False)
+    except Exception as e:
+        return log_and_format_error("download_profile_photos", e, user_id=user_id, limit=limit)
 
 
 @mcp.tool(annotations=ToolAnnotations(openWorldHint=True, readOnlyHint=True))
