@@ -43,6 +43,7 @@ This MCP server exposes a rich suite of Telegram tools focused on safe, read-onl
 ### Messaging
 - **get_messages(chat_id, page, page_size)**: Paginated messages
 - **list_messages(chat_id, limit, search_query, from_date, to_date)**: Filtered messages
+- **export_messages(chat_ids, limit, search_query, from_date, to_date)**: Export one or more chats to markdown with a resource link
 - **get_message_context(chat_id, message_id, context_size)**: Context around a message
 - **get_history(chat_id, limit)**: Full chat history
 - **get_pinned_messages(chat_id)**: List pinned messages

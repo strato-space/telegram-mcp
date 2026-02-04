@@ -20,6 +20,7 @@ import nest_asyncio
 
 # Import the original module so that all globals are initialised once.
 import main as telegram_main  # noqa: F401
+import export as telegram_export  # noqa: F401
 
 try:  # Voice integration for ingesting transcripts
     from voice.src.lib.core import VoicebotClient  # type: ignore
@@ -176,6 +177,7 @@ async def messages_to_voicebot(
         return "\n".join(lines)
     except Exception as e:
         return log_and_format_error("messages_to_voicebot", e, chat_id=chat_id)
+
 
 if __name__ == "__main__":
     nest_asyncio.apply()
