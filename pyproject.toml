@@ -5,7 +5,7 @@ package-mode = false
 
 [project]
 name = "telegram-mcp"
-version = "2.0.5"
+version = "2.0.6"
 description = "Telegram integration for Claude via the Model Context Protocol"
 readme = "README.md"
 authors = [
@@ -32,6 +32,10 @@ dependencies = [
     "python-json-logger>=3.3.0",
     "telethon>=1.39.0"
 ]
+
+[tool.setuptools]
+py-modules = ["export", "main", "voice", "session_string_generator"]
+include-package-data = false
 
 [project.urls]
 "Homepage" = "https://github.com/chigwell/telegram-mcp"
