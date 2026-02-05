@@ -142,7 +142,7 @@ Additionally, GIF-related tools (`get_gif_search`, `get_saved_gifs`, `send_gif`)
 ## 📋 Requirements
 - Python 3.10+
 - [Telethon](https://docs.telethon.dev/)
-- [MCP Python SDK](https://modelcontextprotocol.io/docs/)
+- [MCP Python SDK >= 1.25.0](https://modelcontextprotocol.io/docs/)
 - [Claude Desktop](https://claude.ai/desktop) or [Cursor](https://cursor.so/) (or any MCP client)
 
 ---
