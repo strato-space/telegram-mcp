@@ -2,8 +2,9 @@
 
 ## Project Structure & Module Organization
 - `main.py` defines the core MCP tools and Telegram client wiring.
-- `voice.py` is an alternate entrypoint that loads additional tooling such as exports.
-- `export.py` hosts the `export_messages` tool registered via `voice.py`.
+- `main.py` auto-loads optional tool modules (for example `export.py`) so `export_messages` is available when running `main.py`.
+- `voice.py` is an alternate entrypoint that can load additional tooling such as exports.
+- `export.py` hosts the `export_messages` tool and write-to-markdown logic (TOON output under `./output/`).
 - `session_string_generator.py` handles session string creation.
 
 ## Build, Test, and Development Commands

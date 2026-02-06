@@ -5,7 +5,7 @@ package-mode = false
 
 [project]
 name = "telegram-mcp"
-version = "2.0.6"
+version = "2.0.8"
 description = "Telegram integration for Claude via the Model Context Protocol"
 readme = "README.md"
 authors = [
@@ -30,7 +30,8 @@ dependencies = [
     "nest-asyncio>=1.6.0",
     "python-dotenv>=1.1.0",
     "python-json-logger>=3.3.0",
-    "telethon>=1.39.0"
+    "telethon>=1.39.0",
+    "toon-format",
 ]
 
 [tool.setuptools]
@@ -57,6 +58,9 @@ exclude = [
     "dist",
     "docs/source/conf.py",
 ]
+
+[tool.uv.sources]
+toon-format = { git = "https://github.com/toon-format/toon-python.git", rev = "v0.9.0-beta.1" }
 
 [dependency-groups]
 dev = [

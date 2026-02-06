@@ -198,6 +198,7 @@ telegram_test.log
 test_issues_report.md
 
 # Temporary data files
+output/
 test_upload.txt
 test_voice.ogg
 sticker.webp

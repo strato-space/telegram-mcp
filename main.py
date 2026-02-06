@@ -3207,6 +3207,17 @@ async def create_poll(
             "create_poll", e, chat_id=chat_id, question=question, options=options
         )
 
+# Load optional tool modules (kept separate to avoid touching this file for every add-on).
+# NOTE: `export.py` registers additional tools (e.g. `export_messages`) on the same `mcp` instance.
+try:
+    # When this file is executed as a script (`__main__`), ensure imports of `main`
+    # resolve to this module instance (so add-on modules register tools on the
+    # correct `mcp` object instead of importing a second copy of `main.py`).
+    sys.modules.setdefault("main", sys.modules[__name__])
+    import export  # noqa: F401
+except Exception as e:
+    logger.exception("Failed to load optional export tools", exc_info=e)
+
 
 if __name__ == "__main__":
     nest_asyncio.apply()
