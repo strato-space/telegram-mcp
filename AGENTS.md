@@ -2,8 +2,8 @@
 
 ## Project Structure & Module Organization
 - `main.py` defines the core MCP tools and Telegram client wiring.
-- `voice.py` is the read-only entrypoint; it imports `export.py` to register export tooling.
-- `export.py` hosts the `export_messages` tool and write-to-markdown logic.
+- `voice.py` is a voice-focused entrypoint; it imports `main.py` and optional tool modules (for example `export.py`).
+- `export.py` hosts the `export_messages` tool and write-to-markdown logic (TOON output under `./output/`).
 
 ## Build, Test, and Development Commands
 - Install dependencies: `uv sync`

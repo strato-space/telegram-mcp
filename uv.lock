@@ -843,7 +843,7 @@ wheels = [
 
 [[package]]
 name = "telegram-mcp-ro"
-version = "2.1.3"
+version = "2.1.4"
 source = { editable = "." }
 dependencies = [
     { name = "dotenv" },
@@ -852,6 +852,7 @@ dependencies = [
     { name = "nest-asyncio" },
     { name = "python-dotenv" },
     { name = "telethon" },
+    { name = "toon-format" },
 ]
 
 [package.metadata]
@@ -862,6 +863,7 @@ requires-dist = [
     { name = "nest-asyncio", specifier = ">=1.6.0" },
     { name = "python-dotenv", specifier = ">=1.1.0" },
     { name = "telethon", specifier = ">=1.39.0" },
+    { name = "toon-format", git = "https://github.com/toon-format/toon-python.git?rev=v0.9.0-beta.1" },
 ]
 
 [[package]]
@@ -876,6 +878,11 @@ sdist = { url = "https://files.pythonhosted.org/packages/54/b2/6e48b593a0e4e6785
 wheels = [
     { url = "https://files.pythonhosted.org/packages/32/f2/4e66a59c6d0cb6a25c0c2a630b4b184d81cfe8cb982bf3b65ce32b020fc8/Telethon-1.39.0-py3-none-any.whl", hash = "sha256:aa9f394b94be144799a6f6a93ab463867bc7c63503ede9631751940a98f6c703", size = 715851, upload-time = "2025-02-20T17:30:41.955Z" },
 ]
+
+[[package]]
+name = "toon-format"
+version = "0.9.0b1"
+source = { git = "https://github.com/toon-format/toon-python.git?rev=v0.9.0-beta.1#9f8d6f9ff3c519a018039146c9e99709143a2988" }
 
 [[package]]
 name = "typer"
